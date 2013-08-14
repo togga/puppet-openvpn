@@ -35,3 +35,6 @@ server <%= scope.lookupvar('server') %>
 <% scope.lookupvar('push').each do |item| -%>
 push <%= item %>
 <% end -%>
+<% if scope.lookupvar('client_to_client') -%>
+client-to-client
+<% end -%>

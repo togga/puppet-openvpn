@@ -128,7 +128,8 @@ define openvpn::server(
   $proto = 'tcp',
   $status_log = "${name}/openvpn-status.log",
   $server = '',
-  $push = []
+  $push = [],
+  $client_to_client = false
 ) {
 
   include openvpn

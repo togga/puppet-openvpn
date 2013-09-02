@@ -65,6 +65,10 @@
 #   Integer.  Level of logging verbosity
 #   Default: 3
 #
+# [*update_resolv_conf*]
+#   Boolean.  Whether or not to run the update-resolv-conf script
+#   Default: false
+#
 #
 # === Examples
 #
@@ -114,6 +118,7 @@ define openvpn::client(
   $remote_host = $::fqdn,
   $resolv_retry = 'infinite',
   $verb = '3',
+  $update_resolv_conf = false
 ) {
 
   Openvpn::Server[$server] ->

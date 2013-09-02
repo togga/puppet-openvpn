@@ -24,3 +24,8 @@ mute-replay-warnings
 ns-cert-type server
 verb <%= scope.lookupvar('verb') %>
 mute <%= scope.lookupvar('mute') %>
+<% if scope.lookupvar('update_resolv_conf') -%>
+script-security 2
+up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf
+<% end -%>

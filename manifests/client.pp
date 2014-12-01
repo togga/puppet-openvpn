@@ -69,6 +69,9 @@
 #   Boolean.  Whether or not to run the update-resolv-conf script
 #   Default: false
 #
+# [*ccd_ifconfig*]
+#   Optional string.  Static client IP
+#
 #
 # === Examples
 #
@@ -118,7 +121,8 @@ define openvpn::client(
   $remote_host = $::fqdn,
   $resolv_retry = 'infinite',
   $verb = '3',
-  $update_resolv_conf = false
+  $update_resolv_conf = false,
+  $ccd_ifconfig = undef
 ) {
 
   Openvpn::Server[$server] ->
@@ -183,5 +187,12 @@ define openvpn::client(
                         File["/etc/openvpn/${server}/download-configs/${name}/keys/${name}.key"],
                         File["/etc/openvpn/${server}/download-configs/${name}/keys/${name}.crt"],
                       ],
+  }
+
+  if $ccd_ifconfig != undef {
+    openvpn::client_specific_config { $name:
+      server => $server,
+      ifconfig => $ccd_ifconfig
+    }
   }
 }

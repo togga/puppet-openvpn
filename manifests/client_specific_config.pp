@@ -66,11 +66,6 @@ define openvpn::client_specific_config(
   $ifconfig     = false,
   $dhcp_options = []
 ) {
-
-  Openvpn::Server[$server] ->
-  Openvpn::Client[$name] ->
-  Openvpn::Client_specific_config[$name]
-
   file { "/etc/openvpn/${server}/client-configs/${name}":
     ensure  => present,
     content => template('openvpn/client_specific_config.erb')
